@@ -1,0 +1,3 @@
+<ion-tabs>
+  <ion-tab *ngFor="let tab of authFlag.getActiveMenus()" [show]="tab.show"  [root]="tab.root" [tabTitle]="tab.label" [tabIcon]="tab.icon"></ion-tab>
+</ion-tabs>
