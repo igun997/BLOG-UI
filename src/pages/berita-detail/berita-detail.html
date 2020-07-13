@@ -19,8 +19,7 @@
         <source [src]="detailBerita?.video" type="video/mp4" />
       </video>
       <hr>
-      <div padding>
-        {{detailBerita?.content}}
+      <div [innerHTML]="detailBerita?.content" padding>
       </div>
     </ion-card-content>
 

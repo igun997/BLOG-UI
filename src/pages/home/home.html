@@ -3,13 +3,29 @@
 <ion-content padding>
   <ion-card>
     <ion-card-content>
-      <div class="gallery">
-        <div class="gallery-cell"></div>
-        <div class="gallery-cell"></div>
-        <div class="gallery-cell"></div>
-        <div class="gallery-cell"></div>
-        <div class="gallery-cell"></div>
+      <div *ngIf="posts.length > 0" [flickity] = '{ "wrapAround": true,"pageDots":false,"groupCells": "auto" }' class="carousel js-flickity">
+        <div [flickityChild] *ngFor="let post of posts" class="carousel-cell" (click)="toPost(post.id)">
+          <img [src]="post.image" class="c-image">
+          <ion-label class="label-article">{{post?.label}}</ion-label>
+        </div>
       </div>
     </ion-card-content>
   </ion-card>
+  <ion-item-divider></ion-item-divider>
+  <ion-list>
+    <ion-list-header>
+      Informasi Terbaru
+    </ion-list-header>
+
+    <ion-item *ngFor="let list of posts_list" (click)="toPost(list.id)">
+      <ion-avatar item-start>
+        <img [src]="list.image">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{list.label}}</h2>
+        <p>{{list.desc}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

@@ -14,6 +14,8 @@ import {BeritaPage} from "../pages/berita/berita";
 import {BeritaDetailPage} from "../pages/berita-detail/berita-detail";
 import { ApiProvider } from '../providers/api/api';
 import { FlickityModule } from 'ngx-flickity';
+import {AndroidPermissions} from "@ionic-native/android-permissions";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -43,6 +45,7 @@ import { FlickityModule } from 'ngx-flickity';
     StatusBar,
     SplashScreen,
     HttpClientModule,
+    AndroidPermissions,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     ApiProvider

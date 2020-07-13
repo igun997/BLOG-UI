@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {AlertController, LoadingController} from "ionic-angular";
+import {AndroidPermissions} from "@ionic-native/android-permissions";
 
 /*
   Generated class for the ApiProvider provider.
@@ -14,10 +15,18 @@ export class ApiProvider {
   host:string;
   token:string;
   isLoading = false;
-  constructor(public http: HttpClient,public loadingController: LoadingController,private alertController:AlertController) {
+  constructor(public http: HttpClient,public loadingController: LoadingController,private alertController:AlertController,private permit:AndroidPermissions) {
     console.log('Hello ApiProvider Provider');
-    this.host = "http://anemia2.maugini.in";
+    this.host = "https://anemia2.maugini.in";
     this.token = null;
+    this.permit.checkPermission(this.permit.PERMISSION.INTERNET).then(
+        result=>{
+          console.log('Has permission?', result.hasPermission)
+        },
+        err=>{
+          this.permit.requestPermission(this.permit.PERMISSION.INTERNET)
+        }
+    )
   }
   _request(path:string,data,type:string):Observable<any>{
     let options = {
@@ -103,6 +112,15 @@ export class ApiProvider {
     };
     return this._request("/api/blog/public/feed",params,"get");
   }
+
+  feed_home(limit:number,sort:number){
+    let params = {
+      limit:limit,
+      sort:sort,
+    };
+    return this._request("/api/blog/public/feed",params,"get");
+  }
+
   feed_detail(id:number){
     let params = {
       id:id
