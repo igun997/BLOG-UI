@@ -111,6 +111,117 @@ var HomePage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LandingPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__berita_berita__ = __webpack_require__(113);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the LandingPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var LandingPage = /** @class */ (function () {
+    function LandingPage(navCtrl, navParams, api) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.api = api;
+        this.categories = [];
+        this.next = null;
+        this.categories = [];
+    }
+    LandingPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad LandingPage');
+    };
+    LandingPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.categories = [];
+        var colors = [
+            "danger",
+            "primary"
+        ];
+        this.api.feed_category(10, 1, 1).subscribe(function (data) {
+            var x = 0;
+            _this.next = data.next_page_url;
+            data.data.forEach(function (item) {
+                _this.categories.push({
+                    id: item.id,
+                    name: item.name,
+                    color: ((x % 2 == 0) ? colors[0] : colors[1])
+                });
+                x++;
+            });
+        }, function (error) {
+            _this.api._alert("Error");
+        });
+    };
+    LandingPage.prototype.detail = function (id) {
+        var _this = this;
+        this.api.feed_category_detail(10, 1, id).subscribe(function (res) {
+            if (res.data.length > 0) {
+                console.log("Exist");
+                _this.categories = [];
+                var colors_1 = [
+                    "danger",
+                    "primary"
+                ];
+                _this.api.feed_category_detail(10, 1, id).subscribe(function (data) {
+                    var x = 0;
+                    _this.next = data.next_page_url;
+                    data.data.forEach(function (item) {
+                        _this.categories.push({
+                            id: item.id,
+                            name: item.name,
+                            color: ((x % 2 == 0) ? colors_1[0] : colors_1[1])
+                        });
+                        x++;
+                    });
+                }, function (error) {
+                    _this.api._alert("Error");
+                });
+            }
+            else {
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__berita_berita__["a" /* BeritaPage */], {
+                    id: id
+                });
+            }
+        }, function (error) {
+            _this.api._alert("Category Not Found");
+        });
+    };
+    LandingPage.prototype.nextpage = function (path) {
+    };
+    LandingPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-landing',template:/*ion-inline-start:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/'<!--\n  Generated template for the LandingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Kategori Informasi</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n  <ion-item *ngFor="let cat of categories" >\n    <ion-row>\n      <ion-col size="6" class="item-padding-top-20">\n        <h1>{{cat?.name}}</h1>\n      </ion-col>\n      <ion-col size="6">\n        <button ion-button [color]="cat?.color" button (click)="detail(cat?.id)" large block  class="global-padding">\n          <ion-icon name="arrow-forward"  end></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n\n  </ion-item>\n  </ion-list>\n  <button *ngIf="next != null" ion-button block color="primary" slot="start" (click)="nextpage(next)">\n    Lanjutkan\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]])
+    ], LandingPage);
+    return LandingPage;
+}());
+
+//# sourceMappingURL=landing.js.map
+
+/***/ }),
+
+/***/ 113:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BeritaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
@@ -214,117 +325,6 @@ var BeritaPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 113:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LandingPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__berita_berita__ = __webpack_require__(112);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the LandingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var LandingPage = /** @class */ (function () {
-    function LandingPage(navCtrl, navParams, api) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.api = api;
-        this.categories = [];
-        this.next = null;
-        this.categories = [];
-    }
-    LandingPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad LandingPage');
-    };
-    LandingPage.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        this.categories = [];
-        var colors = [
-            "danger",
-            "primary"
-        ];
-        this.api.feed_category(10, 1, 1).subscribe(function (data) {
-            var x = 0;
-            _this.next = data.next_page_url;
-            data.data.forEach(function (item) {
-                _this.categories.push({
-                    id: item.id,
-                    name: item.name,
-                    color: ((x % 2 == 0) ? colors[0] : colors[1])
-                });
-                x++;
-            });
-        }, function (error) {
-            _this.api._alert("Error");
-        });
-    };
-    LandingPage.prototype.detail = function (id) {
-        var _this = this;
-        this.api.feed_category_detail(10, 1, id).subscribe(function (res) {
-            if (res.data.length > 0) {
-                console.log("Exist");
-                _this.categories = [];
-                var colors_1 = [
-                    "danger",
-                    "primary"
-                ];
-                _this.api.feed_category_detail(10, 1, id).subscribe(function (data) {
-                    var x = 0;
-                    _this.next = data.next_page_url;
-                    data.data.forEach(function (item) {
-                        _this.categories.push({
-                            id: item.id,
-                            name: item.name,
-                            color: ((x % 2 == 0) ? colors_1[0] : colors_1[1])
-                        });
-                        x++;
-                    });
-                }, function (error) {
-                    _this.api._alert("Error");
-                });
-            }
-            else {
-                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__berita_berita__["a" /* BeritaPage */], {
-                    id: id
-                });
-            }
-        }, function (error) {
-            _this.api._alert("Category Not Found");
-        });
-    };
-    LandingPage.prototype.nextpage = function (path) {
-    };
-    LandingPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-landing',template:/*ion-inline-start:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/'<!--\n  Generated template for the LandingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Kategori Informasi</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n  <ion-item *ngFor="let cat of categories" >\n    <ion-row>\n      <ion-col size="6" class="item-padding-top-20">\n        <h1>{{cat?.name}}</h1>\n      </ion-col>\n      <ion-col size="6">\n        <button ion-button [color]="cat?.color" button (click)="detail(cat?.id)" large block  class="global-padding">\n          <ion-icon name="arrow-forward"  end></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n\n  </ion-item>\n  </ion-list>\n  <button *ngIf="next != null" ion-button block color="primary" slot="start" (click)="nextpage(next)">\n    Lanjutkan\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]])
-    ], LandingPage);
-    return LandingPage;
-}());
-
-//# sourceMappingURL=landing.js.map
-
-/***/ }),
-
 /***/ 124:
 /***/ (function(module, exports) {
 
@@ -351,11 +351,11 @@ var map = {
 		2
 	],
 	"../pages/berita/berita.module": [
-		444,
+		445,
 		1
 	],
 	"../pages/landing/landing.module": [
-		445,
+		444,
 		0
 	]
 };
@@ -406,7 +406,7 @@ var TabsPage = /** @class */ (function () {
         this.authFlag = auth;
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/indie/www/BLOG-UI/src/pages/tabs/tabs.html"*/'<ion-tabs>\n  <ion-tab *ngFor="let tab of authFlag.getActiveMenus()" [show]="tab.show"  [root]="tab.root" [tabTitle]="tab.label" [tabIcon]="tab.icon"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/indie/www/BLOG-UI/src/pages/tabs/tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/indie/www/BLOG-UI/src/pages/tabs/tabs.html"*/'<ion-tabs color="tabs">\n  <ion-tab *ngFor="let tab of authFlag.getActiveMenus()" [show]="tab.show"  [root]="tab.root" [tabTitle]="tab.label" [tabIcon]="tab.icon"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/indie/www/BLOG-UI/src/pages/tabs/tabs.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* NavController */]])
     ], TabsPage);
@@ -425,7 +425,7 @@ var TabsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_home_home__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_landing_landing__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_landing_landing__ = __webpack_require__(112);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -544,12 +544,12 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(427);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_tabs_tabs__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_landing_landing__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_landing_landing__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_common_http__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_berita_berita__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_berita_berita__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_berita_detail_berita_detail__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_api_api__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ngx_flickity__ = __webpack_require__(429);
@@ -598,8 +598,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/berita-detail/berita-detail.module#BeritaDetailPageModule', name: 'BeritaDetailPage', segment: 'berita-detail', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/berita/berita.module#BeritaPageModule', name: 'BeritaPage', segment: 'berita', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/landing/landing.module#LandingPageModule', name: 'LandingPage', segment: 'landing', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/landing/landing.module#LandingPageModule', name: 'LandingPage', segment: 'landing', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/berita/berita.module#BeritaPageModule', name: 'BeritaPage', segment: 'berita', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["a" /* IonicStorageModule */].forRoot()

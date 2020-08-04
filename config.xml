@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.kbsalin" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>KB Pasca Salin</name>
-    <description>Keluarga Berencana Pasca Saliin</description>
+<widget id="io.ionic.kb" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>KB (Keluarga Berencana) </name>
+    <description>Keluarga Berencana</description>
     <author email="indra.gunanda@gmail.com" href="/">Terik Store Team</author>
     <content src="index.html" />
     <access origin="*" />
