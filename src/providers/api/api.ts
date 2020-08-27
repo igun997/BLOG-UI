@@ -17,7 +17,7 @@ export class ApiProvider {
   isLoading = false;
   constructor(public http: HttpClient,public loadingController: LoadingController,private alertController:AlertController,private permit:AndroidPermissions) {
     console.log('Hello ApiProvider Provider');
-    this.host = "https://anemia2.maugini.in";
+    this.host = "https://fitri2.maugini.in";
     this.token = null;
     this.permit.checkPermission(this.permit.PERMISSION.INTERNET).then(
         result=>{

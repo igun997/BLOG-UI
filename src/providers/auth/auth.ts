@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HomePage} from "../../pages/home/home";
 import {LandingPage} from "../../pages/landing/landing";
+import {KuesionerPage} from "../../pages/kuesioner/kuesioner";
 
 /*
   Generated class for the AuthProvider provider.
@@ -29,6 +30,12 @@ export class AuthProvider {
         icon:"calendar",
         show:false,
         id:"berita"
+      },{
+        label:"Kuesioner",
+        root:KuesionerPage,
+        icon:"help",
+        show:false,
+        id:"kuesioner"
       }
     ];
     this.onLoggedIn = [
@@ -36,7 +43,7 @@ export class AuthProvider {
     ]
     this.onLoggedOut = [
       "home",
-      "logout",
+      "kuesioner",
       "berita",
     ]
   }

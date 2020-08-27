@@ -15,6 +15,7 @@ import {BeritaDetailPage} from "../pages/berita-detail/berita-detail";
 import { ApiProvider } from '../providers/api/api';
 import { FlickityModule } from 'ngx-flickity';
 import {AndroidPermissions} from "@ionic-native/android-permissions";
+import {KuesionerPage} from "../pages/kuesioner/kuesioner";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
     BeritaPage,
     BeritaDetailPage,
     LandingPage,
-    TabsPage
+    TabsPage,
+    KuesionerPage,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
     BeritaPage,
     BeritaDetailPage,
     LandingPage,
+    KuesionerPage,
     TabsPage
   ],
   providers: [
