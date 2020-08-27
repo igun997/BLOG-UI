@@ -60,8 +60,7 @@ export class KuesionerPage {
 
   next(){
     if (this.questions[this.isCurrent] !== undefined){
-      this.display = this.questions[this.isCurrent].question;
-      this.isCurrent++;
+      this.display = this.questions[this.isCurrent++].question;
     }else{
       this.isShow = true;
     }

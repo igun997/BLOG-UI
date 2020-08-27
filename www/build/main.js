@@ -314,7 +314,7 @@ var LandingPage = /** @class */ (function () {
     };
     LandingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-landing',template:/*ion-inline-start:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/'<!--\n  Generated template for the LandingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Kategori Informasi</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n  <ion-item *ngFor="let cat of categories" >\n    <ion-row>\n      <ion-col size="6" class="item-padding-top-20">\n        <h1>{{cat?.name}}</h1>\n      </ion-col>\n      <ion-col size="6">\n        <button ion-button [color]="cat?.color" button (click)="detail(cat?.id)" large block  class="global-padding">\n          <ion-icon name="arrow-forward"  end></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n\n  </ion-item>\n  </ion-list>\n  <button *ngIf="next != null" ion-button block color="primary" slot="start" (click)="nextpage(next)">\n    Lanjutkan\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/,
+            selector: 'page-landing',template:/*ion-inline-start:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/'<!--\n  Generated template for the LandingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Kategori Informasi</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n  <ion-item *ngFor="let cat of categories" >\n    <ion-row>\n      <ion-col (click)="detail(cat?.id)" class="item-padding-top-20">\n        <h1>{{cat?.name}}</h1>\n      </ion-col>\n    </ion-row>\n\n  </ion-item>\n  </ion-list>\n  <button *ngIf="next != null" ion-button block color="primary" slot="start" (click)="nextpage(next)">\n    Lanjutkan\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/indie/www/BLOG-UI/src/pages/landing/landing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]])
     ], LandingPage);
@@ -1295,8 +1295,7 @@ var KuesionerPage = /** @class */ (function () {
     };
     KuesionerPage.prototype.next = function () {
         if (this.questions[this.isCurrent] !== undefined) {
-            this.display = this.questions[this.isCurrent].question;
-            this.isCurrent++;
+            this.display = this.questions[this.isCurrent++].question;
         }
         else {
             this.isShow = true;
